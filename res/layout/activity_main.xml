@@ -47,7 +47,7 @@
             android:id="@+id/heightTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="My Height:" />
+            android:text="My Height (metres):" />
 
         <EditText
             android:id="@+id/editHeight"
@@ -63,10 +63,10 @@
         android:layout_height="wrap_content" >
 
         <TextView
-            android:id="@+id/widthTextView"
+            android:id="@+id/weightTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="My Weight:" />
+            android:text="My Weight (kilograms):" />
 
         <EditText
             android:id="@+id/editWidth"
