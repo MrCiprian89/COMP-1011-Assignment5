@@ -16,9 +16,10 @@ import android.widget.TextView;
 
 public class MainActivity extends Activity {
 
-	private int _myHeight;
-	private int _myWeight;
+	private double _myHeight;
+	private double _myWeight;
 	private double BMI;
+	private String displayBMI;
 	//is true if metric , false if imperial
 	private boolean metricOrImperial = true;
 	
@@ -69,19 +70,50 @@ public class MainActivity extends Activity {
               public void onClick(View v) {
               	if (metricOrImperial){
               		BMI = _myWeight / (_myHeight * _myHeight);
-              		_BMIEditText.setText(String.valueOf(BMI));
+              		_BMIEditText.setText(String.format("%.02f", BMI));
               }
               	else{
               		BMI = (_myWeight * 703)/ (_myHeight * _myHeight);
-              		_BMIEditText.setText(String.valueOf(BMI));
+              		//displayBMI = String.valueOf(BMI);
+              		_BMIEditText.setText(String.format("%.02f", BMI));
               	}
               }
             };
         
           // assign click listener to the OK button (btnOK)
           unitsButton.setOnClickListener(oclUnitsButton);
-          calculateButton.setOnClickListener(oclcalculateButton);	
-	}
+          calculateButton.setOnClickListener(oclcalculateButton);
+          this._myHeightEditText.addTextChangedListener(EditTextWatcher);
+          this._myWeightEditText.addTextChangedListener(EditTextWatcher);
+	}//END onCreate
+	
+	
+	   private TextWatcher EditTextWatcher = new TextWatcher(){
+	    	
+	    	@Override
+	    	public void onTextChanged(CharSequence s , int start, int before, int count){
+	    		try{
+	    		       if (_myHeightEditText.getText().hashCode() == s.hashCode())
+	    		        {
+	    		    	   _myHeight = Double.parseDouble(s.toString());
+	    		        }
+	    		        else if (_myWeightEditText.getText().hashCode() == s.hashCode())
+	  		        {
+	    		        	_myWeight = Double.parseDouble(s.toString());
+	    		        }
+	    			
+	    		}
+	    		catch(NumberFormatException e){
+	    			_myHeight = 0;
+	    		}
+	    }//END onTExtChanged
+	    	
+	        @Override
+	        public void afterTextChanged(Editable s){}
+	        
+	        @Override
+	        public void beforeTextChanged(CharSequence s , int start, int count, int after){}
+	   };//END TextWatcher
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -100,5 +132,5 @@ public class MainActivity extends Activity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
-	}
+	};
 }
