@@ -19,7 +19,7 @@ public class MainActivity extends Activity {
 	private double _myHeight;
 	private double _myWeight;
 	private double BMI;
-	private String displayBMI;
+	
 	//is true if metric , false if imperial
 	private boolean metricOrImperial = true;
 	
@@ -105,6 +105,7 @@ public class MainActivity extends Activity {
 	    		}
 	    		catch(NumberFormatException e){
 	    			_myHeight = 0;
+	    			_myWeight = 0;
 	    		}
 	    }//END onTExtChanged
 	    	
